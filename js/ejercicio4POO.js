@@ -18,6 +18,7 @@ class Productos {
 
 }
 
+
 let productoUno = new Productos("1", "Computadora", "50000");
 let productoDos = new Productos("2", "Monitor", "25000");
 let productoTres = new Productos("3", "Impresora", "42000");
