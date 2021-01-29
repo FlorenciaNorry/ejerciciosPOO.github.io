@@ -20,61 +20,82 @@ class Contacto {
     aniadirContacto() {
         agenda.push(contacto);
         console.log(agenda);
+        //document.write(contacto.mostrarNombre + "" + contacto.mostrarTelefono + "<br>");
     }
-    // listarContactos() {
-    //     for (i in agenda) {
-    //         document.write(agenda[i].mostrarNombre + "" + agenda[i].mostrarTelefono);
-    //     }
-    // }
+
+    listarContacto() {
+        let prop;
+            for (prop in agenda) {
+                document.write("Nombre: " + agenda[prop].mostrarNombre +"<br>");
+                document.write("Telefono: " + agenda[prop].mostrarTelefono +"<br>");
+                document.write("<br>");
+                console.log(agenda);
+            }
+    }
+
+    existeContacto(Inombre) {
+        let prop;
+        if(agenda.length > 0){
+            for (prop in agenda) {
+                if(agenda[prop].mostrarNombre == Inombre){
+                    alert("El contacto ya existe");
+                }
+            }
+        }else{
+            alert("contacto guardado");
+        }
+
+    }
+
+    buscarContacto() {
+        let Bcontacto = prompt("Ingresar nombre del contacto");
+        let prop;
+        for (prop in agenda) {
+            if(agenda[prop].mostrarNombre == Bcontacto){
+                return document.write("Nombre: " + agenda[prop].mostrarNombre +"<br>"+ "Telefono: " + agenda[prop].mostrarTelefono);
+            }
+        }
+        alert("El contacto no existe");
+    }
+
+    eliminarContacto(){
+
+    }
 }
 
+agenda = [];
 
-let agenda = [10];
-for (i = 0; i < agenda.length; i++) {
-    let Inombre = prompt("Ingresar el nombre del contacto");
-    let Itelefono = prompt("Ingresar numero del telefono");
-    contacto = new Contacto(Inombre, Itelefono);
-    console.log(contacto);
-    contacto.aniadirContacto();
-}
-
-
-
-
-
-
-
-
-// let op = parseInt(prompt("1-Añadir contacto<br>2-Buscar contacto<br>3-Eliminar contacto<br>4-Ver contactos5-Salir"));
-
-// switch (op) {
-//     case 1:
-//         for (i = 0; i < 2; i++) {
-//             while(op=1){
-//                 let Inombre = prompt("Ingresar el nombre del contacto");
-//                 let Itelefono = prompt("Ingresar numero del telefono");
-//                 prompt("¿Desea Ingresar un contacto?");
-//                 agenda[i] = new Contacto(Inombre, Itelefono);
-
-//             }
-
-//         }
-//         for (i in agenda) {
-//             document.write(agenda[i].mostrarNombre + "" + agenda[i].mostrarTelefono + "<br>");
-//         }
-//         break;
-//     case 2:
-
-//         break;
-//     case 3:
-//         document.write("El usuario selecciono <br>");
-//         break;
-//     case 4:
-//         document.write("El usuario selecciono <br>");
-//         break;
-//     case 5:
-//         document.write("Gracias");
-//         break;
-//     default:
-// }
-
+do {
+    let menu = parseInt(prompt("Elija una opcion:" + " " +
+        "1-Añadir contacto" + " " +
+        "2-Mostrar Contactos" + " " +
+        "3-Buscar Contactos" + " " +
+        "4-Eliminar contacto" + " " +
+        "5-Salir"));
+    
+    switch (menu) {
+        case 1:
+            do {
+                let Inombre = prompt("Ingresar el nombre del contacto");
+                let Itelefono = prompt("Ingresar numero del telefono");
+                contacto = new Contacto(Inombre, Itelefono);
+                contacto.existeContacto(Inombre,Itelefono);
+                contacto.aniadirContacto();
+                val = confirm("Desea ingresar otro contacto");
+            } while (val);
+            break;
+        case 2:
+            contacto.listarContacto();
+            break;
+        case 3:
+            contacto.buscarContacto();
+            break;
+        case 4:
+            contacto.eliminarContacto();            break;
+        case 5:
+            document.write("Gracias");
+            break;
+        default:
+    }
+    continuar = confirm("¿desea continuar?");
+} while (continuar);
